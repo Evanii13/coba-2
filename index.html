@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3.2.6/dist/vue.global.js"></script>
+    <title>TUGAS-VUE-DEVANI</title>
+</head>
+<body>
+    <header class="z-10 sticky top-0 bg-black py-5">
+        <nav class="bg-black w-9/12 mx-auto flex flex-row items-center justify-between">
+            <div class="uppercase text-lg w-1/4">
+                <a href="">
+                    <span id="Halo" class="font-extrabold text-white">DEVANI</span>
+                    <span class="font-extrabold text-blue-700">ZELVIA</span>
+                </a>
+            </div>
+        
+            <div class="w-1/2 flex items-end justify-evenly">
+                <a href="#services" class="text-xl font-semibold text-white ml-4">
+                    <span>Services</span>
+                </a>
+                <a href="#portfolios" class="text-xl font-semibold text-white ml-4">
+                    <span>Portfolio</span>
+                </a>
+                <a href="#product" class="text-xl font-semibold text-white ml-4">
+                    <span>Product</span>
+                </a>
+                <a href="#Contact" class="text-xl font-semibold text-white ml-4">
+                    <span>Contact</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="mx-auto max-w-7xl py-10 sm:px-6 lg:px-8" id="app">
+        <div class="flex flex-wrap my-5 -mx-2">
+            <div class="w-full lg:w-3/5 min-h-screen lg:p-10 flex flex-col h-[300px]">
+                <!-- Konten untuk "product" -->
+                <h1 class="text-center text-4xl font-bold text-blue-700 shadow-md mb-8">Product Skincare</h1>
+                <div class="w-full mt-14 px-8 grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-1 lg:grid-cols-2 md:gap-x-4 xl:gap-x-4">
+                    <div v-for="(product, index) in products" :key="index" class="rounded-lg max-w-md overflow-hidden hover:bg-white shadow-md dark:bg-neutral-700 text-center">
+                        <!-- Card image -->
+                        <a href="#!">
+                            <img class="w-full h-40 object-cover rounded-t-lg" :src="product.image" alt="" />
+                        </a>
+
+                        <!-- Card body -->
+                        <div class="p-6">
+                            <!-- Title -->
+                            <h5 class="mb-2 text-lg font-semibold tracking-wide text-neutral-800 dark:text-neutral-50">
+                                {{ product.name }}
+                            </h5>
+                             <!-- Harga -->
+                             <p class="text-sm text-neutral-500 dark:text-neutral-300">Price: ${{ product.price }}</p>
+                            <!-- Buttons -->
+                            <div class="flex justify-between items-center mt-4">
+                                <a href="#" class="text-sm font-medium bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">Add Product</a>
+                                <a href="#" class="text-sm font-medium bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full lg:w-2/5 shadow-lg lg:p-10 flex flex-col">
+                <div class="flex flex-row items-center justify-between px-5 mt-5 border-b-2">
+                    <div>
+                        <span class="font-bold text-xl text-blue-500">My Orders</span>
+                    </div>
+                </div>
+                <!-- Cart Items -->
+                <div class="mt-4">
+                    <!-- Replace with your cart items here -->
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">SKINTIFIC MOISTURIZER</h3>
+                        <p>Price: $10.00</p>
+                        <p>Quantity: 2</p>
+                        <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+                        <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Add Product</button>
+                    </div>
+                    <div class="mb-4">
+                        <h3 class="text-lg font-semibold">TONER AVOSKIN</h3>
+                        <p>Price: $15.00</p>
+                        <p>Quantity: 1</p>
+                        <button class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600">Remove</button>
+                        <button class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600">Add Product</button>
+                    </div>
+                </div>
+                <!-- Checkout Button -->
+                <div class="mt-4">
+                    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Checkout Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue;
+
+        const app = createApp({
+            data() {
+                return {
+                    products: [
+                        {
+                            code: 'S001',
+                            name: 'SKINTIFIC MOISTURIZER',
+                            price : '10.000',
+                            image: 'image/skintific.png',
+                        },
+                        {
+                            code: 'S002',
+                            name: 'SERUM SOMETHIC',
+                            price : '50.000',
+                            image: 'image/serum.jpeg',
+                        },
+                        {
+                            code: 'S003',
+                            name: 'TONER AVOSKIN',
+                            price : '15.000',
+                            image: 'image/avoskin.jpeg',
+                        },
+                        {
+                            code: 'S002',
+                            name: 'FACEWASH CETAPIL',
+                            price : '30.000',
+                            image: 'image/cetapil.jpg',
+                        },
+                    ],
+                };
+            },
+            methods: {
+                clearCart() {
+                    // Tambahkan logika untuk menghapus keranjang di sini
+                },
+            },
+        });
+
+        app.mount('#app');
+    </script>
+</body>
+</html>
